@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func DbConnection() (dbConn *gorm.DB, err error) {
+func DbConnection(connDet ConnDet) (dbConn *gorm.DB, err error) {
 	// Create a connection string
 	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", constant.Host,
 		constant.Port, constant.Username, constant.Password, constant.DbName)
@@ -27,5 +27,8 @@ func DbConnection() (dbConn *gorm.DB, err error) {
 	}
 	// create a test table to check if db is working fine
 	dbConn.AutoMigrate(&db.Test{})
+	if connDet.Tx {
+		dbConn = dbConn.Begin()
+	}
 	return
 }
