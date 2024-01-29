@@ -1,7 +1,21 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"pro-tasker/lib"
+
+	"gorm.io/gorm"
+)
 
 func main() {
-	fmt.Println("Hi,,,,")
+	var (
+		dbConn *gorm.DB
+		err    error
+	)
+	fmt.Println("Welcome To Pro - Tasker ::) ")
+	if dbConn, err = lib.DbConnection(); err != nil {
+		return
+	}
+	fmt.Println(dbConn)
+
 }
