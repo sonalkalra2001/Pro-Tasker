@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (reqModel *ListUsers) ProcessReq(c *gin.Context) (data interface{}, err error) {
+func (reqModel *ListUsers) ProcessReq(c *gin.Context) (apiResp lib.ApiResp, err error) {
 	var (
 		dbConn    *gorm.DB
 		usersList []mapper.ListUsers
@@ -22,6 +22,6 @@ func (reqModel *ListUsers) ProcessReq(c *gin.Context) (data interface{}, err err
 	if usersList, err = model.ListUsers(dbConn, reqModel.UserID); err != nil {
 		return
 	}
-	data = usersList
+	apiResp.Data = usersList
 	return
 }

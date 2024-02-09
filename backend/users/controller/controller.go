@@ -12,7 +12,7 @@ func ListUsers(c *gin.Context) {
 	var (
 		reqModel service.ListUsers
 		err      error
-		data     interface{}
+		data     lib.ApiResp
 	)
 
 	if err = (&reqModel).ValidateReq(c); err == nil {
